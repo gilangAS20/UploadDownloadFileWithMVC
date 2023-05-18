@@ -1,0 +1,34 @@
+@model List<string>
+@{
+    ViewBag.Title = "Index";
+}
+<h2>Upload File</h2>
+
+<form action="@Url.Action("Index", "FileUpload")" method="post" enctype="multipart/form-data">
+    <label for="file">Upload File:</label>
+    <br>
+    <input type="file" name="file" id="file" />
+    <br>
+    <br>
+    <input type="submit" value="Upload File" />
+
+    <br>
+    @ViewBag.Message
+    <br>
+
+    <h3>Document</h3>
+    <table>
+        <tr>
+            <th>File Name</th>
+            <th>Download</th>
+        </tr>
+
+        @for (var i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <td>@Model[i].ToString()</td>
+                <td>@Html.ActionLink("Download", "Download", new { ImageName = @Model[i].ToString() })</td>
+            </tr>
+        }
+    </table>
+</form>
